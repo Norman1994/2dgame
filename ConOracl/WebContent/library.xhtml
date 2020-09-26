@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>JSF JDBC Integration</title>
+
+</h:head>
+<h:body>
+<h:form>
+	<h2>Главная страница библиотекаря</h2>	
+	<h:dataTable value="#{libBean.lib}" var="l" border="2">
+	<h:column>
+			<f:facet name="header">Сотрудник</f:facet>
+         #{l.kodSotr}
+      </h:column>
+		<h:column>
+			<f:facet name="header">Книга</f:facet>
+         #{l.bookId}
+      </h:column>
+		<h:column>
+			<f:facet name="header">Дата сдачи</f:facet>
+         #{l.date}
+      </h:column>
+		<h:column>
+			<f:facet name="header">Штраф за просрочку (руб)</f:facet>
+           #{l.pinalty}
+       </h:column>  
+       <h:column>
+       <h:commandLink value="Вернуть книгу" action="#{libBean.deleteAction(l)}" />
+       </h:column>
+	</h:dataTable>
+	<h3>Выберите пользователя</h3>	
+	<h:selectOneMenu value="#{libBean.selectedLib}">
+				<f:selectItems value="#{libBean.user}" var="user"
+				itemValue="#{user.kodSotr}" itemLabel="#{user.fio}"/>
+			</h:selectOneMenu>
+			<h4>Выберите книгу</h4>
+			<h:selectOneMenu value="#{libBean.selectedBooks}">
+				<f:selectItems value="#{libBean.book}" var="book"
+				itemValue="#{book.bookId}" itemLabel="#{book.bookName}"/>
+			</h:selectOneMenu>
+			<h4>Выберите дату</h4>
+			<h:outputText value="Кол-во дней"/>
+            <h:inputText value="#{libBean.bDate}"/>
+			 <h:commandButton value="Добавить запись" action="#{libBean.addRec}" />		 
+			 </h:form>
+</h:body>
+</html>

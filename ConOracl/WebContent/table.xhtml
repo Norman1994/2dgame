@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>JSF JDBC Integration</title>
+
+</h:head>
+<h:body>
+	<h:form>
+	<h2>ФИО #{Main.user.fio}</h2>	
+	<h2>Подразделение #{Main.user.department}</h2>
+	<h2>Должность #{Main.user.position}</h2>
+	<h2>Дата принятия на работу #{Main.user.work}</h2>
+	<h2>Оклад #{Main.user.salary}</h2>
+    
+	<h:panelGrid columns="1" border="0">
+	<h:outputText value="Введите год"/>
+            <h:inputText value="#{Main.god}"/>
+          </h:panelGrid> 
+    <h:commandButton value="Мои отпуска" action="#{Main.setOtp}" /> 
+    
+	<h:commandButton value="Мои книги" action="#{Main.goLibrary}" />
+		</h:form>
+</h:body>
+</html>

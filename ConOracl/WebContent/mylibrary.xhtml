@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>JSF JDBC Integration</title>
+
+</h:head>
+<h:body>
+	<h2>Cписок моих книг</h2>	
+	<h:dataTable value="#{Main.lib}" var="l" border="2">
+		<h:column>
+			<f:facet name="header">Книга</f:facet>
+         #{l.bookId}
+      </h:column>
+		<h:column>
+			<f:facet name="header">Дата возврата</f:facet>
+           #{l.date}
+       </h:column>
+         <h:column>
+			<f:facet name="header">Штраф за просрочку</f:facet>
+           #{l.pinalty}
+       </h:column>
+	</h:dataTable>
+</h:body>
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="UsersDataBase"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>Users.Users</class>
+		<class>Positions.Positions</class>
+		<class>Departments.Departments</class>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521/xe" />
+			<property name="javax.persistence.jdbc.password" value="serv" />
+			<property name="javax.persistence.jdbc.user" value="server" />
+			<property name="hibernate.show_sql" value="true" />			
+		</properties>
+	</persistence-unit>
+	
+	<persistence-unit name="Library" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>Lib.Lib</class>
+		<class>User.User</class>
+		<class>Book.Book</class>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/lib" />
+			<property name="javax.persistence.jdbc.password" value="DIMA" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="hibernate.show_sql" value="true" />
+			
+		</properties>
+	</persistence-unit>
+</persistence>
