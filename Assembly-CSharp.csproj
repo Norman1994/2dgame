@@ -91,7 +91,7 @@
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\QuestMan.cs" />
      <Compile Include="Assets\Scripts\Questkey.cs" />
-     <Compile Include="Assets\Scripts\Save.cs" />
+     <Compile Include="Assets\Scripts\SaveGameManager.cs" />
      <Compile Include="Assets\Scripts\SecretLabel.cs" />
      <Compile Include="Assets\Scripts\ShootTrigger.cs" />
      <Compile Include="Assets\Scripts\ShootableMonster.cs" />

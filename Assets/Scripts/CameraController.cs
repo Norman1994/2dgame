@@ -8,6 +8,8 @@ public class CameraController : MonoBehaviour {
 
 	private Transform target;
 
+	
+
 	private void Awake()
 	{
 		if (!target)
