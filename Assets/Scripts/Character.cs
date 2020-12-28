@@ -1,14 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEngine.SceneManagement;
 
+[Serializable]
 public class Character : Unit
 {
     [SerializeField]
-    private int lives = 5;
+    public int lives = 5;
 
     [SerializeField]
-    private int chances = 3;
+    public int chances = 3;
+
+    public float PositionX, PositionY, PositionZ;
 
     public bool entering;
 
@@ -27,6 +32,7 @@ public class Character : Unit
 
     private bool boss;
     private bool ground;
+    private bool shootUp;
 
     public static bool quest;
 
@@ -48,7 +54,7 @@ public class Character : Unit
     [SerializeField]
     private float speed = 3.0f;
     [SerializeField]
-    private float jumpforce = 100.0f;
+    private float jumpforce = 1.0f;
 
     private bool isGrounded = false;
 
@@ -81,6 +87,11 @@ public class Character : Unit
 
         bullet = Resources.Load<Bullet>("Bullet");
         shootMonster = new ShootableMonster();
+
+        if (SceneManager.GetActiveScene().name == "Level2")
+        {
+            shootUp = true;
+        };
     }
 
     private void Start()
@@ -151,11 +162,18 @@ public class Character : Unit
     {
         Vector3 position = transform.position;
         position.y += 2.0f;
-        position.x += 1.0f;
+        position.x += 0.1f;
         Bullet newBullet = Instantiate(bullet, position, bullet.transform.rotation) as Bullet;
 
         newBullet.Parent = gameObject;
-        newBullet.Direction = newBullet.transform.right * (sprite.flipX ? -2.0f : 2.0f);
+        if (shootUp)
+        {
+            newBullet.Direction = newBullet.transform.up;
+        }
+        else
+        {
+            newBullet.Direction = newBullet.transform.right * (sprite.flipX ? -2.0f : 2.0f);
+        }
     }
 
     public override void ReceiveDamage()

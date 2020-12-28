@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using System;
+using Debug = UnityEngine.Debug;
 
 public class SaveGameManager : MonoBehaviour
 {
@@ -10,12 +13,7 @@ public class SaveGameManager : MonoBehaviour
     public static string persistentDataPath;
     public Character character;
 
-    BinaryFormatter bf = new BinaryFormatter();
-
-    void Start()
-	{
-		Debug.Log(Application.persistentDataPath);
-	}
+    
 
     void Awake()
     {
@@ -32,6 +30,7 @@ public class SaveGameManager : MonoBehaviour
 
     public void SaveGame()
     {
+        BinaryFormatter bf = new BinaryFormatter();
         if (!IsSaveFile())
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/game_save");
@@ -41,8 +40,12 @@ public class SaveGameManager : MonoBehaviour
             Directory.CreateDirectory(Application.persistentDataPath + "/game_save/character_status");
         }
 
-        FileStream file = File.Create(Application.persistentDataPath + "/game_save/character_status/save.txt");
+        FileStream file = File.Create(Application.persistentDataPath + "/game_save/character_status/save.gd");
 
+        character.PositionX = transform.position.x;
+        character.PositionY = transform.position.y;
+        character.PositionZ = transform.position.z;
+        Debug.Log(character.lives);
         var json = JsonUtility.ToJson(character);
         bf.Serialize(file, json);
         file.Close();
@@ -50,14 +53,17 @@ public class SaveGameManager : MonoBehaviour
 
     public void LoadGame()
     {
+        
         if (!Directory.Exists(Application.persistentDataPath + "/game_save/character_status"))
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/game_save/character_status");
         }
-        if (File.Exists(Application.persistentDataPath + "/game_save/character_status/save.txt"))
+        if (File.Exists(Application.persistentDataPath + "/game_save/character_status/save.gd"))
         {
-            FileStream file = File.Open(Application.persistentDataPath + "/game_save/character_status/save.txt", FileMode.Open);
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/game_save/character_status/save.gd", FileMode.Open);
             JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), character);
+            Debug.Log(character.lives);
             file.Close();
         }
     }
