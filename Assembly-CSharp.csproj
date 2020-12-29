@@ -95,6 +95,7 @@
      <Compile Include="Assets\Scripts\SecretLabel.cs" />
      <Compile Include="Assets\Scripts\ShootTrigger.cs" />
      <Compile Include="Assets\Scripts\ShootableMonster.cs" />
+     <Compile Include="Assets\Scripts\SpawnScript.cs" />
      <Compile Include="Assets\Scripts\Trap.cs" />
      <Compile Include="Assets\Scripts\UFOMonster.cs" />
      <Compile Include="Assets\Scripts\Unit.cs" />

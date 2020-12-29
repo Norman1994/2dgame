@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class MovebleMonster : Monster 
@@ -27,7 +28,14 @@ public class MovebleMonster : Monster
 
 	protected override void Update ()
 	{
-		Move ();
+		if (SceneManager.GetActiveScene().name == "Level2")
+		{
+			MoveDown();
+		}
+		else
+		{
+			Move();
+		}
 	}
 
 	protected override void OnTriggerEnter2D (Collider2D collider)
@@ -60,5 +68,10 @@ public class MovebleMonster : Monster
 	private void Move()
 	{
 		transform.position = Vector3.MoveTowards (transform.position, transform.position + direction, speed * Time.deltaTime);
+	}
+
+	private void MoveDown()
+	{
+		transform.position += Vector3.down * Time.deltaTime;
 	}
 }
