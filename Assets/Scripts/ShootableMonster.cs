@@ -107,5 +107,13 @@ public class ShootableMonster : Monster {
 			damage = true;
 			ReceiveDamage ();
 		}
+
+		Unit unit = collider.GetComponent<Unit>();
+
+		if (unit && unit is Character)
+		{
+			Debug.Log("Ай!");
+			unit.ReceiveDamage();
+		}
 	}
 }

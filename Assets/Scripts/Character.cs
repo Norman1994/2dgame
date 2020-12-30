@@ -34,6 +34,8 @@ public class Character : Unit
     private bool ground;
     private bool shootUp;
 
+    private bool isShooting;
+
     public static bool quest;
 
     public UnityEngine.UI.Text currentChanceText;
@@ -98,15 +100,17 @@ public class Character : Unit
     {
         audioSource = GetComponent<AudioSource>();
         boss = false;
+        isShooting = true;
     }
 
     private void Update()
     {
         State = CharState.Idle;
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && isShooting == true)
         {
             Shoot();
             audioSource.PlayOneShot(shootSound, 0.3f);
+            isShooting = false;
         }
         if (Input.GetButton("Horizontal"))
             Run();
@@ -145,7 +149,7 @@ public class Character : Unit
     {
         State = CharState.Jump;
 
-        rigidbody.AddForce(transform.up * 15.5f, ForceMode2D.Impulse);
+        rigidbody.AddForce(transform.up * 2.5f, ForceMode2D.Impulse);
     }
 
     private void CheckGround()
@@ -174,6 +178,13 @@ public class Character : Unit
         {
             newBullet.Direction = newBullet.transform.right * (sprite.flipX ? -2.0f : 2.0f);
         }
+        StartCoroutine(BlockShoot());
+    }
+
+    IEnumerator BlockShoot()
+    {
+        yield return new WaitForSeconds(1);
+        isShooting = true;
     }
 
     public override void ReceiveDamage()
